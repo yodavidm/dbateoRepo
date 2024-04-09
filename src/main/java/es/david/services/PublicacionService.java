@@ -1,10 +1,12 @@
 package es.david.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import es.david.dto.PublicacionDto;
+import es.david.entities.Categoria;
 import es.david.entities.Publicacion;
 import es.david.entities.Usuario;
 import es.david.repositories.PublicacionRepo;
@@ -15,7 +17,7 @@ public class PublicacionService {
 
 	private PublicacionRepo publicacionRepo;
 
-	private PublicacionService(PublicacionRepo publicacionRepo) {
+	public PublicacionService(PublicacionRepo publicacionRepo) {
 		this.publicacionRepo = publicacionRepo;
 	}
 
@@ -27,6 +29,9 @@ public class PublicacionService {
 				.usuario(Usuario.builder()
 						.googleId(publicacionDto.getId_usuario())
 						.build())
+				.categoria(Categoria.builder()
+						.id(publicacionDto.getId_categoria())
+						.build())
 				.build();
 		
 		publicacionRepo.save(publicacion);
@@ -35,6 +40,11 @@ public class PublicacionService {
 
 	public List<Publicacion> listarPublicaciones() {
 		return publicacionRepo.findAll();
+	}
+	
+	public Optional<Publicacion> buscarPorId(Long id) {
+		Optional<Publicacion> publicacionEncontrada = publicacionRepo.findById(id);
+		return publicacionEncontrada;
 	}
 
 }

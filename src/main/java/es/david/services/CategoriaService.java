@@ -15,7 +15,7 @@ public class CategoriaService {
 	private CategoriaRepo categoriaRepo;
 	
 	@Autowired
-	private CategoriaService(CategoriaRepo categoriaRepo) {
+	public CategoriaService(CategoriaRepo categoriaRepo) {
 		this.categoriaRepo = categoriaRepo;
 	}
 	

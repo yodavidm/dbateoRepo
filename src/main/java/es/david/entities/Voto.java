@@ -2,6 +2,8 @@ package es.david.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,5 +39,6 @@ public class Voto implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "id_publicacion")
+	@JsonIgnore
 	private Publicacion publicacion;
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,21 +45,17 @@ public class Publicacion implements Serializable{
 	@Column(name = "fecha_creacion",nullable = false)
 	private Date fecha_creacion;
 	
-	@Hidden
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
-	@Hidden
 	@OneToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-	@Hidden
 	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)
 	private List<Comentario> comentarios;
 	
-	@Hidden
 	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)
 	private List<Voto> votos;
 

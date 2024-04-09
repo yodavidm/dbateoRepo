@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,11 +50,14 @@ public class Usuario implements Serializable{
 	private Rol rol;
 	
 	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Publicacion> publicaciones;
 	
 	@OneToMany(mappedBy = "seguido",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Seguidor> seguidos;
 	
 	@OneToMany(mappedBy = "seguidor", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Seguidor> seguidores;
 }

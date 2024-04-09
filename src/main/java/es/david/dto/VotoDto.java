@@ -15,5 +15,7 @@ import lombok.NoArgsConstructor;
 public class VotoDto {
 
 	private boolean tipo;
+	private Long id_usuario;
+	private Long id_publicacion;
 
 }

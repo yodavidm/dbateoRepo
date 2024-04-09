@@ -21,5 +21,7 @@ public class PublicacionDto {
 	private Date fecha_creacion;
 	
 	private Long id_usuario;
+	
+	private Long id_categoria;
 
 }

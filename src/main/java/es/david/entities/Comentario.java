@@ -3,6 +3,8 @@ package es.david.entities;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,8 +31,8 @@ public class Comentario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "contenido",nullable = false)
-	private String contenido;
+	@Column(name = "comentario",nullable = false)
+	private String comentario;
 	
 	@Column(name = "fecha_creacion",nullable = false)
 	private Date fecha_creacion;
@@ -41,6 +43,7 @@ public class Comentario implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_publicacion")
+	@JsonIgnore
 	private Publicacion publicacion;
 
 }

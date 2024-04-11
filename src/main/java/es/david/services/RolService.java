@@ -20,6 +20,7 @@ public class RolService {
 	}
 
 	public Rol crearRol(RolDto rolDto) {
+		
 		Rol rol = Rol.builder()
 				.nombreRol(rolDto.getNombreRol())
 				.build();

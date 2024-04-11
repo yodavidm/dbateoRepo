@@ -16,8 +16,7 @@ public class UsuarioDto {
 	
     
 	private String nickname;
-    
-    
+    private String email;
 	private Date fechaRegistro;
 	
 }

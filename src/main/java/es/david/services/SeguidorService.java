@@ -9,14 +9,17 @@ import es.david.dto.SeguidorDto;
 import es.david.entities.Seguidor;
 import es.david.entities.Usuario;
 import es.david.repositories.SeguidorRepo;
+import es.david.repositories.UsuarioRepo;
 
 @Service
 public class SeguidorService {
 	
 	private SeguidorRepo seguidorRepo;
+	private UsuarioRepo usuarioRepo;
 	
-	public SeguidorService(SeguidorRepo seguidorRepo) {
+	public SeguidorService(SeguidorRepo seguidorRepo,UsuarioRepo usuarioRepo) {
 		this.seguidorRepo = seguidorRepo;
+		this.usuarioRepo = usuarioRepo;
 	}
 	
 	public List<Seguidor> listarSeguidores(){
@@ -30,13 +33,15 @@ public class SeguidorService {
 	
 	public Seguidor crearSeguidor(SeguidorDto seguidorNuevo) {
 		
+		Optional<Usuario> usuarioOptSeguido = usuarioRepo.findById(seguidorNuevo.getIdSeguido());
+		Usuario usuarioSeguido = usuarioOptSeguido.get();
+		
+		Optional<Usuario> usuarioOptSeguidor = usuarioRepo.findById(seguidorNuevo.getIdSeguidor());
+		Usuario usuarioSeguidor = usuarioOptSeguidor.get();
+		
 		Seguidor seguidor = Seguidor.builder()
-				.seguido(Usuario.builder()
-						.googleId(seguidorNuevo.getIdSeguido())
-						.build())
-				.seguidor(Usuario.builder()
-						.googleId(seguidorNuevo.getIdSeguidor())
-						.build())
+				.seguido(usuarioSeguido)
+				.seguidor(usuarioSeguidor)
 				.build();
 		
 		seguidorRepo.save(seguidor);

@@ -28,16 +28,10 @@ public class VotoController {
 	}
 	
 	@PostMapping
-	public VotoDto crearVoto(@RequestBody VotoDto votoNuevo) {
+	public Voto crearVoto(@RequestBody VotoDto votoNuevo) {
 		
-		VotoDto votoDto = VotoDto.builder()
-				.tipo(votoNuevo.isTipo())
-				.id_publicacion(votoNuevo.getId_publicacion())
-				.id_usuario(votoNuevo.getId_usuario())
-				.build();
+		return votoService.crearVoto(votoNuevo);
 		
-		votoService.crearVoto(votoDto);
-		return votoDto;
 	}
 
 }

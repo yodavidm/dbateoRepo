@@ -28,17 +28,9 @@ public class ComentarioController {
 	}
 	
 	@PostMapping
-	public ComentarioDto crearComentario(@RequestBody ComentarioDto comentarioNuevo) {
+	public Comentario crearComentario(@RequestBody ComentarioDto comentarioNuevo) {
 		
-		ComentarioDto comentarioDto = ComentarioDto.builder()
-				.comentario(comentarioNuevo.getComentario())
-				.fecha_creacion(comentarioNuevo.getFecha_creacion())
-				.id_usuario(comentarioNuevo.getId_usuario())
-				.id_publicacion(comentarioNuevo.getId_publicacion())
-				.build();
-		
-		comentarioService.crearComentario(comentarioDto);
-		return comentarioDto;
+		return comentarioService.crearComentario(comentarioNuevo);
 	}
 
 }

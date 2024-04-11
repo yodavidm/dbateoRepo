@@ -23,7 +23,7 @@ public class PublicacionController {
 	
 	private PublicacionService publicacionService;
 	
-	@Autowired
+	
 	private PublicacionController(PublicacionService publicacionService) {
 		this.publicacionService = publicacionService;
 	}
@@ -34,16 +34,8 @@ public class PublicacionController {
 	}
 	
 	@PostMapping
-	public PublicacionDto crearPublicacion(@RequestBody PublicacionDto publicacionNueva) {
-		PublicacionDto publicacionDto = PublicacionDto.builder()
-				.titulo(publicacionNueva.getTitulo())
-				.contenido(publicacionNueva.getContenido())
-				.fecha_creacion(publicacionNueva.getFecha_creacion())
-				.id_usuario(publicacionNueva.getId_usuario())
-				.id_categoria(publicacionNueva.getId_categoria())
-				.build();
-		publicacionService.crearPublicacion(publicacionDto);
-		return publicacionDto;
+	public Publicacion crearPublicacion(@RequestBody PublicacionDto publicacionNueva) {
+		return publicacionService.crearPublicacion(publicacionNueva);
 	}
 	
 	@GetMapping("/{id}")

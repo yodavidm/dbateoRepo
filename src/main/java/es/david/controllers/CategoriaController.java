@@ -29,13 +29,9 @@ public class CategoriaController {
 	
 	//se usa dto para traspasar información del dto al objeto original
 	@PostMapping
-	public CategoriaDto crearCategoria(@RequestBody CategoriaDto categoriaNueva) {
-		
-		CategoriaDto categoriaDto = CategoriaDto.builder()
-				.nombre(categoriaNueva.getNombre())
-				.build();
-		categoriaService.crearCategoria(categoriaDto);
-		return categoriaDto;
+	public Categoria crearCategoria(@RequestBody CategoriaDto categoriaNueva) {
+
+		return categoriaService.crearCategoria(categoriaNueva);
 	}
 
 }

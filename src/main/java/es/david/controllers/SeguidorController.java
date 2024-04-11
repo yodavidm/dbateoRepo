@@ -30,14 +30,9 @@ public class SeguidorController {
 	}
 	
 	@PostMapping
-	public SeguidorDto seguir(@RequestBody SeguidorDto seguidorNuevo ) {
-		SeguidorDto seguidorDto = SeguidorDto.builder()
-				.idSeguido(seguidorNuevo.getIdSeguido())
-				.idSeguidor(seguidorNuevo.getIdSeguidor())
-				.build();
+	public Seguidor seguir(@RequestBody SeguidorDto seguidorNuevo ) {
 		
-		seguidorService.crearSeguidor(seguidorDto);
-		return seguidorDto;
+		return seguidorService.crearSeguidor(seguidorNuevo);
 	}
 	
 	@GetMapping("/{id}")

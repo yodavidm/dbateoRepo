@@ -21,22 +21,17 @@ public class RolController {
 	private RolController(RolService rolService) {
 		this.rolService = rolService;
 	}
-	
+
 	@GetMapping
-	public List<Rol> obtenerRoles(){
+	public List<Rol> obtenerRoles() {
 		return rolService.listarRoles();
-		
+
 	}
-	
+
 	@PostMapping
-	public RolDto crearRol(@RequestBody RolDto rolNuevo) {
-		
-		RolDto rolDto = RolDto.builder()
-				.nombreRol(rolNuevo.getNombreRol())
-				.build();
-		
-		rolService.crearRol(rolDto);
-		return rolDto;
+	public Rol crearRol(@RequestBody RolDto rolNuevo) {
+
+		return rolService.crearRol(rolNuevo);
 	}
 
 }

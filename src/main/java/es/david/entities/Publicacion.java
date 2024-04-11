@@ -49,7 +49,7 @@ public class Publicacion implements Serializable{
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	

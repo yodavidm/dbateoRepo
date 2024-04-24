@@ -3,7 +3,7 @@ package es.david.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +19,7 @@ import es.david.services.PublicacionService;
 
 @RestController
 @RequestMapping("/publicaciones")
+@CrossOrigin(origins = "*")
 public class PublicacionController {
 	
 	private PublicacionService publicacionService;
@@ -33,7 +34,7 @@ public class PublicacionController {
 		return publicacionService.listarPublicaciones();
 	}
 	
-	@PostMapping
+	@PostMapping("/crear")
 	public Publicacion crearPublicacion(@RequestBody PublicacionDto publicacionNueva) {
 		return publicacionService.crearPublicacion(publicacionNueva);
 	}

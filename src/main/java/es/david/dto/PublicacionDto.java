@@ -23,5 +23,5 @@ public class PublicacionDto {
 	private Long id_usuario;
 	
 	private Long id_categoria;
-
+		
 }

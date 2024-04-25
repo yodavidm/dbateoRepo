@@ -58,5 +58,9 @@ public class PublicacionService {
 		Optional<Publicacion> publicacionEncontrada = publicacionRepo.findById(id);
 		return publicacionEncontrada;
 	}
+	
+	public void eliminarPublicacion(Long id) {
+		publicacionRepo.deleteById(id);
+	}
 
 }

@@ -1,6 +1,7 @@
 package es.david.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class CategoriaService {
 	
 	public List<Categoria> listarCategorias(){
 		return categoriaRepo.findAll();
+	}
+	
+	public Optional<Categoria> encontrarPorId(Long id) {
+		return categoriaRepo.findById(id);
 	}
 
 }

@@ -12,6 +12,7 @@ import es.david.entities.Usuario;
 import es.david.repositories.CategoriaRepo;
 import es.david.repositories.PublicacionRepo;
 import es.david.repositories.UsuarioRepo;
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -27,6 +28,7 @@ public class PublicacionService {
 		this.usuarioRepo = usuarioRepo;
 	}
 
+	@Transactional
 	public Publicacion crearPublicacion(PublicacionDto publicacionDto) {
 		
 		Optional<Categoria> categoriaOptional = categoriaRepo.findById(publicacionDto.getId_categoria());

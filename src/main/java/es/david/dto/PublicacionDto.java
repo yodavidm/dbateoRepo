@@ -1,7 +1,6 @@
 package es.david.dto;
 
-import java.sql.Date;
-
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +17,7 @@ public class PublicacionDto {
 
 	private String contenido;
 
-	private Date fecha_creacion;
+	private Timestamp fecha_creacion;
 	
 	private Long id_usuario;
 	

@@ -64,5 +64,15 @@ public class PublicacionService {
 	public void eliminarPublicacion(Long id) {
 		publicacionRepo.deleteById(id);
 	}
+	
+	public List<Publicacion> obtenerPublicacionesPorCategoria(Long idCategoria){
+		Optional<Categoria> categoriaOptional = categoriaRepo.findById(idCategoria);
+		if(categoriaOptional.isPresent()) {
+			Categoria categoria = categoriaOptional.get();
+			return publicacionRepo.findByCategoria(categoria);
+		}else {
+			return List.of();
+		}
+	}
 
 }

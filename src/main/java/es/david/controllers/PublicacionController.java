@@ -50,6 +50,11 @@ public class PublicacionController {
 	public void eliminarPublicacion(@PathVariable Long id) {
 		publicacionService.eliminarPublicacion(id);
 	}
+	
+	@GetMapping("/categoria/{id}")
+	public List<Publicacion> obtenerPublicacionPorCategoria(@PathVariable Long id){
+		return publicacionService.obtenerPublicacionesPorCategoria(id);
+	}
 
 
 }

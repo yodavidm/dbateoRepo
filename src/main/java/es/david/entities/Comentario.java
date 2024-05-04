@@ -2,8 +2,7 @@ package es.david.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +34,7 @@ public class Comentario implements Serializable {
 	private String comentario;
 	
 	@Column(name = "fecha_creacion",nullable = false)
-	private Date fecha_creacion;
+	private Timestamp fecha_creacion;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
@@ -43,7 +42,6 @@ public class Comentario implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_publicacion")
-	@JsonIgnore
 	private Publicacion publicacion;
 
 }

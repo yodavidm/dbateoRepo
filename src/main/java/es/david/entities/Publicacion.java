@@ -1,10 +1,10 @@
 package es.david.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -53,6 +53,7 @@ public class Publicacion implements Serializable{
 	private Categoria categoria;
 	
 	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Comentario> comentarios;
 	
 	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)

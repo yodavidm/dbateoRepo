@@ -1,6 +1,5 @@
 package es.david.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,15 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PublicacionDto {
-
-	private String titulo;
-
-	private String contenido;
-
+public class LoginDTO {
 	
-	private Long id_usuario;
-	
-	private Long id_categoria;
-		
+	private String email;
+	private String password;
+
 }

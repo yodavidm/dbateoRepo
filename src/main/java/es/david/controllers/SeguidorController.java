@@ -1,8 +1,11 @@
 package es.david.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import es.david.services.SeguidorService;
 
 @RestController
 @RequestMapping("/seguidores")
+@CrossOrigin(origins = "*")
 public class SeguidorController {
 	
 	private SeguidorService seguidorService;
@@ -29,16 +33,24 @@ public class SeguidorController {
 		return seguidorService.listarSeguidores();
 	}
 	
-	@PostMapping
-	public Seguidor seguir(@RequestBody SeguidorDto seguidorNuevo ) {
-		
+	@PostMapping("/seguir")
+	public Seguidor seguir(@RequestBody SeguidorDto seguidorNuevo ) throws Exception {
 		return seguidorService.crearSeguidor(seguidorNuevo);
 	}
 	
-	@GetMapping("/{id}")
-	public Optional<Seguidor> encontrarPorId(@PathVariable Long id) {
-		Optional<Seguidor> seguidorEncontrado = seguidorService.listarSeguidorPorId(id);
-		return seguidorEncontrado;
+	@GetMapping("/{id}/seguidos")
+	public List<Seguidor> obtenerSeguidos(@PathVariable Long id) {
+	    return seguidorService.obtenerSeguidosPorUsuario(id);
+	}
+	
+	@GetMapping("/{id}/seguidores")
+	public List<Seguidor> obtenerSeguidores(@PathVariable Long id) {
+	    return seguidorService.obtenerSeguidoresPorUsuario(id);
 	}
 
+    @GetMapping("/verificar/{idSeguidor}/{idSeguido}")
+    public boolean verificarSeguimientoExistente(@PathVariable Long idSeguidor, @PathVariable Long idSeguido) {
+        return seguidorService.verificarSeguimientoExistente(idSeguidor, idSeguido);
+    }
+    
 }

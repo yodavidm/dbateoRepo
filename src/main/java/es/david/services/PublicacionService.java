@@ -1,5 +1,7 @@
 package es.david.services;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,27 +31,37 @@ public class PublicacionService {
 	}
 
 	@Transactional
-	public Publicacion crearPublicacion(PublicacionDto publicacionDto) {
-		
-		Optional<Categoria> categoriaOptional = categoriaRepo.findById(publicacionDto.getId_categoria());
-		Optional<Usuario> usuarioOptional = usuarioRepo.findById(publicacionDto.getId_usuario());
+    public Publicacion crearPublicacion(PublicacionDto publicacionDto) {
+        // Obtener la fecha actual
+        Date fechaActual = new Date();
+        Timestamp timestamp = new Timestamp(fechaActual.getTime());  
 
-		
-		Categoria categoria = categoriaOptional.get();	
-		Usuario usuario = usuarioOptional.get();
-		
-	    Publicacion publicacion = Publicacion.builder()
-	            .titulo(publicacionDto.getTitulo())
-	            .contenido(publicacionDto.getContenido())
-	            .fecha_creacion(publicacionDto.getFecha_creacion())
-	            .usuario(usuario)
-	            .categoria(categoria)
-	            .build();
+        // Buscar categoria y usuario
+        Optional<Categoria> categoriaOptional = categoriaRepo.findById(publicacionDto.getId_categoria());
+        Optional<Usuario> usuarioOptional = usuarioRepo.findById(publicacionDto.getId_usuario());
 
-	    // Guardar la publicación en la base de datos
-	    publicacionRepo.save(publicacion);
-	    return publicacion;
-	}
+        if (!categoriaOptional.isPresent()) {
+            throw new RuntimeException("Categoria no encontrada");
+        }
+        if (!usuarioOptional.isPresent()) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        Categoria categoria = categoriaOptional.get();
+        Usuario usuario = usuarioOptional.get();
+
+        Publicacion publicacion = Publicacion.builder()
+                .titulo(publicacionDto.getTitulo())
+                .contenido(publicacionDto.getContenido())
+                .fecha_creacion(timestamp)
+                .usuario(usuario)
+                .categoria(categoria)
+                .build();
+
+        // Guardar la publicación en la base de datos
+        publicacionRepo.save(publicacion);
+        return publicacion;
+    }
 
 
 	public List<Publicacion> listarPublicaciones() {

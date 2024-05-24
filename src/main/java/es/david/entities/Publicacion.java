@@ -52,11 +52,11 @@ public class Publicacion implements Serializable{
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	
-	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "publicacion", orphanRemoval = true)
 	@JsonIgnore
 	private List<Comentario> comentarios;
 	
-	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Voto> votos;
 
 }

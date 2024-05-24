@@ -1,14 +1,14 @@
 package es.david.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,43 +21,43 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "usuario")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Usuario implements Serializable{
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "google_id", nullable = false, unique = true)
-	private Long googleId;
-	
+public class Usuario implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, unique = true)
+    private Long id;
+
     @Column(name = "email", nullable = false, unique = true)
-	private String email;
-    
+    private String email;
+
     @Column(name = "nickname", nullable = false, unique = true)
-	private String nickname;
+    private String nickname;
     
-    
+    private String password;
+
     @Column(name = "fecha_Registro", nullable = false)
-	private Date fechaRegistro;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_rol")
-	private Rol rol;
-	
-	@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Publicacion> publicaciones;
-	
-	@OneToMany(mappedBy = "seguido",cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Seguidor> seguidos;
-	
-	@OneToMany(mappedBy = "seguidor", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Seguidor> seguidores;
+    private Date fechaRegistro;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
+    private List<Publicacion> publicaciones;
+
+    @OneToMany(mappedBy = "seguido", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Seguidor> seguidos;
+
+    @OneToMany(mappedBy = "seguidor", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Seguidor> seguidores;
 }

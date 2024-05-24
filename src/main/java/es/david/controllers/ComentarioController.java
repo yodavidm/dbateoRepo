@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,5 +52,10 @@ public class ComentarioController {
 			return List.of();
 		}
 		
+	}
+	
+	@DeleteMapping("/{id}")
+	public void eliminarComentario(@PathVariable Long id) {
+		comentarioService.eliminarComentario(id);
 	}
 }

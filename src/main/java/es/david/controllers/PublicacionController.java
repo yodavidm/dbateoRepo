@@ -30,7 +30,7 @@ public class PublicacionController {
 		this.publicacionService = publicacionService;
 	}
 	
-	@GetMapping
+	@GetMapping()
 	public List<Publicacion> obtenerPublicaciones(){
 		return publicacionService.listarPublicaciones();
 	}

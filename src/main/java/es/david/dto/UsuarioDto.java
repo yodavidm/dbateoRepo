@@ -1,6 +1,6 @@
 package es.david.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 import lombok.AllArgsConstructor;
@@ -17,6 +17,6 @@ public class UsuarioDto {
     
 	private String nickname;
     private String email;
-	private Date fechaRegistro;
+    private String password;
 	
 }

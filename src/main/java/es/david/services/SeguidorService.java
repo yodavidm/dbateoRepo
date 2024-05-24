@@ -10,6 +10,7 @@ import es.david.entities.Seguidor;
 import es.david.entities.Usuario;
 import es.david.repositories.SeguidorRepo;
 import es.david.repositories.UsuarioRepo;
+import jakarta.transaction.Transactional;
 
 @Service
 public class SeguidorService {
@@ -26,26 +27,44 @@ public class SeguidorService {
 		return seguidorRepo.findAll();
 	}
 	
-	public Optional<Seguidor> listarSeguidorPorId(Long id){
-		Optional<Seguidor> seguidorEncontrado = seguidorRepo.findById(id);
-		return seguidorEncontrado;
+	public List<Seguidor> obtenerSeguidosPorUsuario(Long idUsuario) {
+	    return seguidorRepo.encontrarPorIdUsuarioSeguido(idUsuario);
 	}
 	
-	public Seguidor crearSeguidor(SeguidorDto seguidorNuevo) {
-		
-		Optional<Usuario> usuarioOptSeguido = usuarioRepo.findById(seguidorNuevo.getIdSeguido());
-		Usuario usuarioSeguido = usuarioOptSeguido.get();
-		
-		Optional<Usuario> usuarioOptSeguidor = usuarioRepo.findById(seguidorNuevo.getIdSeguidor());
-		Usuario usuarioSeguidor = usuarioOptSeguidor.get();
-		
-		Seguidor seguidor = Seguidor.builder()
-				.seguido(usuarioSeguido)
-				.seguidor(usuarioSeguidor)
-				.build();
-		
-		seguidorRepo.save(seguidor);
-		return seguidor;
+	public List<Seguidor> obtenerSeguidoresPorUsuario(Long idUsuario) {
+	    return seguidorRepo.encontrarPorIdUsuarioSeguidor(idUsuario);
 	}
+	
+	public Seguidor crearSeguidor(SeguidorDto seguidorNuevo) throws Exception {
+		
+		if (!verificarSeguimientoExistente(seguidorNuevo.getIdSeguidor(), seguidorNuevo.getIdSeguido())) {
+			Optional<Usuario> usuarioOptSeguido = usuarioRepo.findById(seguidorNuevo.getIdSeguido());
+			Usuario usuarioSeguido = usuarioOptSeguido.get();
+			
+			Optional<Usuario> usuarioOptSeguidor = usuarioRepo.findById(seguidorNuevo.getIdSeguidor());
+			Usuario usuarioSeguidor = usuarioOptSeguidor.get();
+			
+			
+			Seguidor seguidor = Seguidor.builder()
+					.seguido(usuarioSeguido)
+					.seguidor(usuarioSeguidor)
+					.build();
+			
+			seguidorRepo.save(seguidor);
+			return seguidor;
+		}else {
+			throw new Exception("error siguiendo "); 
+		}
+
+	}
+	
+    public boolean verificarSeguimientoExistente(Long idSeguidor, Long idSeguido) {
+        return seguidorRepo.existsBySeguidorIdAndSeguidoId(idSeguidor, idSeguido);
+    }
+    
+
+    
+
+    
 
 }

@@ -1,5 +1,7 @@
 package es.david.services;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +41,12 @@ public class ComentarioService {
 		Optional<Publicacion> publicacionOptional = publicacionRepo.findById(comentarioNuevo.getId_publicacion());
 		Publicacion publicacion = publicacionOptional.get();
 		
+        Date fechaActual = new Date();
+        Timestamp timestamp = new Timestamp(fechaActual.getTime());	
+		
 		Comentario comentario = Comentario.builder()
 				.comentario(comentarioNuevo.getComentario())
-				.fecha_creacion(comentarioNuevo.getFecha_creacion())
+				.fecha_creacion(timestamp)
 				.usuario(usuario)
 				.publicacion(publicacion)
 				.build();
@@ -54,6 +59,14 @@ public class ComentarioService {
 	//obtener comentarios de una publicación por id 
 	public List<Comentario> obtenerComentariosPorPublicacion(Publicacion publicacion){
 		return this.comentarioRepo.findByPublicacionId(publicacion.getId());
+	}
+	
+	public void eliminarComentario(Long id) {
+		try {
+			comentarioRepo.deleteById(id);
+		} catch (Exception e) {
+			System.out.println("Hubo un error al eliminar");
+		}
 	}
 
 }

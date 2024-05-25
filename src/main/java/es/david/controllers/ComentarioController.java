@@ -20,7 +20,7 @@ import es.david.services.PublicacionService;
 
 @RestController
 @RequestMapping("/comentarios")
-@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class ComentarioController {
 	
 	private ComentarioService comentarioService;

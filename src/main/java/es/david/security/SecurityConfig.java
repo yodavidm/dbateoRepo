@@ -28,6 +28,7 @@ public class SecurityConfig {
 		return http
 				.csrf(csrf->csrf.disable())
 				.authorizeHttpRequests(authRequest->authRequest
+						.requestMatchers("/publicaciones/crear").authenticated()
 						.requestMatchers("/auth/**","/validar","/publicaciones","/user/{id}","/publicaciones/{id}","/publicaciones/categoria/{id}","/comentarios","/comentarios/publicacion/{id}","/publicaciones/crear").permitAll()  //Aqui ire todas las rutas publicas
 							.anyRequest().authenticated() //aqui se implementa roles ADMIN Y USER EN UN FUTURO
 				)

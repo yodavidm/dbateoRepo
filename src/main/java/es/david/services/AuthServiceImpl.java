@@ -73,7 +73,7 @@ public class AuthServiceImpl implements IAuthService {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			usuario.setPassword(encoder.encode(usuario.getPassword()));
 			usuario.setFechaRegistro(new Date());
-			usuario.setRol(Rol.builder().id(2L).build());
+			usuario.setRol(Rol.builder().id(1L).build());
 			usuarioRepo.save(usuario);
 			response.setMessage("Usuario creado con éxito.");
 			

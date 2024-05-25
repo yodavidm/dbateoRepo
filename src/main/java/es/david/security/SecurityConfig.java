@@ -28,8 +28,8 @@ public class SecurityConfig {
 		return http
 				.csrf(csrf->csrf.disable())
 				.authorizeHttpRequests(authRequest->authRequest
-						.requestMatchers("/publicaciones/crear","/seguidores/**").authenticated()
-						.requestMatchers("/auth/**","/validar","/publicaciones","/user/{id}","/publicaciones/{id}","/publicaciones/categoria/{id}","/comentarios","/comentarios/publicacion/{id}").permitAll()  //Aqui ire todas las rutas publicas
+						.requestMatchers("/publicaciones/crear").authenticated()
+						.requestMatchers("/auth/**","/validar","/publicaciones","/user/{id}","/publicaciones/{id}","/publicaciones/categoria/{id}","/comentarios","/comentarios/publicacion/{id}","/seguidores/**","/seguidores/{id}/seguidos","/seguidores/{id}/seguidores").permitAll()  //Aqui ire todas las rutas publicas
 							.anyRequest().authenticated() //aqui se implementa roles ADMIN Y USER EN UN FUTURO
 				)
 				.sessionManagement(sessionManager->

@@ -14,7 +14,7 @@ import es.david.repositories.UsuarioRepo;
 
 @RestController
 @RequestMapping("/validar")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class ValidationController {
 	
     @Autowired

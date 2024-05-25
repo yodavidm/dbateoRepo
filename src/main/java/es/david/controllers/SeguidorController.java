@@ -19,7 +19,7 @@ import es.david.services.SeguidorService;
 
 @RestController
 @RequestMapping("/seguidores")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class SeguidorController {
 	
 	private SeguidorService seguidorService;

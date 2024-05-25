@@ -19,7 +19,7 @@ import es.david.services.IAuthService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class AuthControllers {
 	
 	@Autowired

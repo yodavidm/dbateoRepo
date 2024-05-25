@@ -17,7 +17,7 @@ import es.david.services.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class CategoriaController {
 	
 	private CategoriaService categoriaService;

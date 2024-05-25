@@ -20,7 +20,7 @@ import es.david.services.UsuarioService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class UsuarioController {
 
 	@Autowired

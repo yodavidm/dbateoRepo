@@ -20,7 +20,7 @@ import es.david.services.PublicacionService;
 
 @RestController
 @RequestMapping("/publicaciones")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://dbateofront.vercel.app", allowCredentials = "true")
 public class PublicacionController {
 	
 	private PublicacionService publicacionService;

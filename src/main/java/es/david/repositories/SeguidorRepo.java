@@ -18,6 +18,7 @@ public interface SeguidorRepo extends JpaRepository<Seguidor, Long> {
     List<Seguidor> encontrarPorIdUsuarioSeguidor(Long idUsuarioSeguido);
     
     boolean existsBySeguidorIdAndSeguidoId(Long seguidorId, Long seguidoId);
+    
 
 
 

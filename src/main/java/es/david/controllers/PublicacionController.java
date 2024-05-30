@@ -55,6 +55,11 @@ public class PublicacionController {
 	public List<Publicacion> obtenerPublicacionPorCategoria(@PathVariable Long id){
 		return publicacionService.obtenerPublicacionesPorCategoria(id);
 	}
+	
+	@GetMapping("user/{nickname}")
+	public List<Publicacion> obtenerPublicacionPorNickname(@PathVariable String nickname){
+		return publicacionService.obtenerPublicacionPorNickname(nickname);
+	}
 
 
 }

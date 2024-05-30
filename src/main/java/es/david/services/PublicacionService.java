@@ -86,5 +86,9 @@ public class PublicacionService {
 			return List.of();
 		}
 	}
+	
+	public List<Publicacion> obtenerPublicacionPorNickname(String nickname){
+		return publicacionRepo.findPublicacionesByNickname(nickname);
+	}
 
 }

@@ -62,6 +62,10 @@ public class SeguidorService {
         return seguidorRepo.existsBySeguidorIdAndSeguidoId(idSeguidor, idSeguido);
     }
     
+    public void eliminarSeguimiento(Long idSeguido,Long idSeguidor) {
+    	seguidorRepo.eliminarSeguimiento(idSeguido,idSeguidor);
+    }
+    
     
     
 

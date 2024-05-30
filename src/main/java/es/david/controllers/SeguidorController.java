@@ -53,6 +53,10 @@ public class SeguidorController {
         return seguidorService.verificarSeguimientoExistente(idSeguidor, idSeguido);
     }
     
+    @DeleteMapping("/eliminar/{idSeguido}/{idSeguidor}")
+    public void eliminarSeguimiento(@PathVariable Long idSeguido,@PathVariable Long idSeguidor) {
+    	seguidorService.eliminarSeguimiento(idSeguido, idSeguidor);
+    }
 
     
 }

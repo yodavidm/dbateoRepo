@@ -11,6 +11,7 @@ import es.david.dto.UsuarioDto;
 import es.david.entities.Rol;
 import es.david.entities.Usuario;
 import es.david.repositories.ComentarioRepo;
+import es.david.repositories.SeguidorRepo;
 import es.david.repositories.UsuarioRepo;
 import jakarta.transaction.Transactional;
 
@@ -18,7 +19,11 @@ import jakarta.transaction.Transactional;
 public class UsuarioService {
 
 	private UsuarioRepo usuarioRepo;
+	
+	@Autowired
 	private ComentarioRepo comentarioRepo;
+	@Autowired
+	private SeguidorRepo seguidorRepo;
 
 	@Autowired
 	public UsuarioService(UsuarioRepo usuarioRepo) {
@@ -50,6 +55,7 @@ public class UsuarioService {
 
 	@Transactional
 	public void eliminarUsuario(Long id) {
+		seguidorRepo.deleteByUsuarioId(id);
 		// Eliminar al usuario
 		usuarioRepo.deleteById(id);
 	}

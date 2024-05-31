@@ -26,6 +26,11 @@ public interface SeguidorRepo extends JpaRepository<Seguidor, Long> {
     
     boolean existsBySeguidorIdAndSeguidoId(Long seguidorId, Long seguidoId);
     
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM seguidor WHERE id_seguidor = ?1 OR id_seguido = ?1", nativeQuery = true)
+    void deleteByUsuarioId(Long usuarioId);
+    
 
 
 

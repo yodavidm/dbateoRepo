@@ -56,7 +56,6 @@ public class Publicacion implements Serializable{
 	@JsonIgnore
 	private List<Comentario> comentarios;
 	
-	@OneToMany(mappedBy = "publicacion",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<Voto> votos;
+
 
 }

@@ -1,9 +1,6 @@
 package es.david.entities;
 
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import java.sql.Timestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,27 +15,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "voto")
+@Table(name = "notificacion")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Voto implements Serializable{
-	
+public class Notificacion {
+
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "tipo_voto")
-	private boolean tipo;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuarios;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_publicacion")
-	@JsonIgnore
-	private Publicacion publicacion;
+	@JoinColumn(name = "id_usuario", nullable = false)
+	private Usuario usuario;
+
+	@Column(name = "mensaje", nullable = false)
+	private String mensaje;
+
+	@Column(name = "fecha_creacion", nullable = false)
+	private Timestamp fechaCreacion;
+
+
 }

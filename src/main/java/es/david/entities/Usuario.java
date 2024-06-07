@@ -60,4 +60,8 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "seguidor", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<Seguidor> seguidores;
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Notificacion> notificaciones;
 }

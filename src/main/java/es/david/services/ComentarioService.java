@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.david.dto.ComentarioDto;
@@ -22,6 +23,9 @@ public class ComentarioService {
 	private ComentarioRepo comentarioRepo;
 	private UsuarioRepo usuarioRepo;
 	private PublicacionRepo publicacionRepo;
+	
+    @Autowired
+    private NotificacionService notificacionService;
 	
 	public ComentarioService(ComentarioRepo comentarioRepo,UsuarioRepo usuarioRepo,PublicacionRepo publicacionRepo) {
 		this.comentarioRepo = comentarioRepo;
@@ -51,8 +55,10 @@ public class ComentarioService {
 				.publicacion(publicacion)
 				.build();
 		
-		
 		comentarioRepo.save(comentario);
+		
+		notificacionService.notificarComentario(comentario);
+
 		return comentario;
 	} //devolver dto en un futuro
 	

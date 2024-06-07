@@ -3,6 +3,7 @@ package es.david.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.david.dto.SeguidorDto;
@@ -17,6 +18,9 @@ public class SeguidorService {
 	
 	private SeguidorRepo seguidorRepo;
 	private UsuarioRepo usuarioRepo;
+	
+	@Autowired
+	private NotificacionService notificacionService;
 	
 	public SeguidorService(SeguidorRepo seguidorRepo,UsuarioRepo usuarioRepo) {
 		this.seguidorRepo = seguidorRepo;
@@ -51,6 +55,8 @@ public class SeguidorService {
 					.build();
 			
 			seguidorRepo.save(seguidor);
+            // Notificar al usuario seguido
+            notificacionService.notificarSeguimiento(seguidor);
 			return seguidor;
 		}else {
 			throw new Exception("error siguiendo "); 

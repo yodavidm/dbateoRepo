@@ -38,7 +38,7 @@ public class Publicacion implements Serializable{
 	@Column(name = "titulo",nullable = false)
 	private String titulo;
 	
-	@Column(name = "contenido",nullable = false,length = 450)
+	@Column(name = "contenido",nullable = false)
 	private String contenido;
 	
 	@Column(name = "fecha_creacion",nullable = false)

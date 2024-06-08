@@ -30,7 +30,7 @@ public class Comentario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "comentario",nullable = false)
+	@Column(name = "comentario",nullable = false,length = 450)
 	private String comentario;
 	
 	@Column(name = "fecha_creacion",nullable = false)

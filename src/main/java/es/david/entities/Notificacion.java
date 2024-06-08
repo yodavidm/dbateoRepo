@@ -36,5 +36,7 @@ public class Notificacion {
 	@Column(name = "fecha_creacion", nullable = false)
 	private Timestamp fechaCreacion;
 
+	@Column(name = "leida", nullable = false)
+	private boolean leida;
 
 }

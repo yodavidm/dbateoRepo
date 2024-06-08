@@ -24,6 +24,7 @@ public class NotificacionService {
             .usuario(usuario)
             .mensaje(mensaje)
             .fechaCreacion(Timestamp.from(Instant.now()))
+            .leida(false)
             .build();
         notificacionRepository.save(notificacion);
     }

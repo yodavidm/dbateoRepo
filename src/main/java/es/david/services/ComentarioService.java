@@ -19,54 +19,49 @@ import es.david.repositories.UsuarioRepo;
 
 @Service
 public class ComentarioService {
-	
+
 	private ComentarioRepo comentarioRepo;
 	private UsuarioRepo usuarioRepo;
 	private PublicacionRepo publicacionRepo;
-	
-    @Autowired
-    private NotificacionService notificacionService;
-	
-	public ComentarioService(ComentarioRepo comentarioRepo,UsuarioRepo usuarioRepo,PublicacionRepo publicacionRepo) {
+	private NotificacionService notificacionService;
+
+	public ComentarioService(ComentarioRepo comentarioRepo, UsuarioRepo usuarioRepo, PublicacionRepo publicacionRepo,
+			NotificacionService notificacionService) {
 		this.comentarioRepo = comentarioRepo;
-		this.usuarioRepo=usuarioRepo;
+		this.usuarioRepo = usuarioRepo;
 		this.publicacionRepo = publicacionRepo;
+		this.notificacionService = notificacionService;
 	}
-	
-	public List<Comentario> listarComentarios(){
+
+	public List<Comentario> listarComentarios() {
 		return comentarioRepo.findAll();
 	}
-	
+
 	public Comentario crearComentario(ComentarioDto comentarioNuevo) {
-		
-		
+
 		Optional<Usuario> usuarioOptional = usuarioRepo.findById(comentarioNuevo.getId_usuario());
 		Usuario usuario = usuarioOptional.get();
 		Optional<Publicacion> publicacionOptional = publicacionRepo.findById(comentarioNuevo.getId_publicacion());
 		Publicacion publicacion = publicacionOptional.get();
-		
-        Date fechaActual = new Date();
-        Timestamp timestamp = new Timestamp(fechaActual.getTime());	
-		
-		Comentario comentario = Comentario.builder()
-				.comentario(comentarioNuevo.getComentario())
-				.fecha_creacion(timestamp)
-				.usuario(usuario)
-				.publicacion(publicacion)
-				.build();
-		
+
+		Date fechaActual = new Date();
+		Timestamp timestamp = new Timestamp(fechaActual.getTime());
+
+		Comentario comentario = Comentario.builder().comentario(comentarioNuevo.getComentario())
+				.fecha_creacion(timestamp).usuario(usuario).publicacion(publicacion).build();
+
 		comentarioRepo.save(comentario);
-		
+
 		notificacionService.notificarComentario(comentario);
 
 		return comentario;
-	} //devolver dto en un futuro
-	
-	//obtener comentarios de una publicación por id 
-	public List<Comentario> obtenerComentariosPorPublicacion(Publicacion publicacion){
+	} // devolver dto en un futuro
+
+	// obtener comentarios de una publicación por id
+	public List<Comentario> obtenerComentariosPorPublicacion(Publicacion publicacion) {
 		return this.comentarioRepo.findByPublicacionId(publicacion.getId());
 	}
-	
+
 	public void eliminarComentario(Long id) {
 		try {
 			comentarioRepo.deleteById(id);
